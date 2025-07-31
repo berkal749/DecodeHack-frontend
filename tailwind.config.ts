@@ -18,6 +18,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				inter: ['Inter', 'system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,7 +64,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Smart city transportation theme
+				'electric-cyan': 'hsl(var(--electric-cyan))',
+				'electric-green': 'hsl(var(--electric-green))',
+				'neon-purple': 'hsl(var(--neon-purple))',
+				'city-gray': 'hsl(var(--city-gray))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

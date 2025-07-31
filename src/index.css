@@ -2,41 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Smart City Transportation App Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Deep black city theme */
+    --background: 220 13% 7%;                /* #121212 deep black */
+    --foreground: 0 0% 98%;                  /* Nearly white text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 9%;                      /* Slightly lighter black for cards */
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 8%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Electric cyan primary */
+    --primary: 190 100% 50%;                 /* #00D9FF electric cyan */
+    --primary-foreground: 220 13% 7%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Dark secondary */
+    --secondary: 220 13% 15%;                /* Dark gray secondary */
+    --secondary-foreground: 0 0% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 13% 12%;                    /* Muted dark */
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Electric green accent */
+    --accent: 150 100% 50%;                  /* #00FF88 electric green */
+    --accent-foreground: 220 13% 7%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 18%;                   /* Subtle borders */
+    --input: 220 13% 15%;                    /* Input backgrounds */
+    --ring: 190 100% 50%;                    /* Cyan focus rings */
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Custom transportation theme colors */
+    --electric-cyan: 190 100% 50%;           /* #00D9FF */
+    --electric-green: 150 100% 50%;          /* #00FF88 */
+    --neon-purple: 270 100% 60%;             /* #9966FF */
+    --city-gray: 220 13% 25%;                /* Medium gray */
+    --glow-cyan: 190 100% 50%;               /* For glowing effects */
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--electric-cyan)), hsl(var(--electric-green)));
+    --gradient-dark: linear-gradient(180deg, hsl(var(--background)), hsl(220 13% 5%));
+    --gradient-overlay: linear-gradient(180deg, transparent, hsl(var(--background) / 0.8));
+
+    /* Glows and shadows */
+    --shadow-glow: 0 0 30px hsl(var(--electric-cyan) / 0.3);
+    --shadow-green-glow: 0 0 20px hsl(var(--electric-green) / 0.4);
+    --shadow-card: 0 8px 25px hsl(220 13% 3% / 0.8);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +124,57 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+}
+
+@layer utilities {
+  /* Glow effects */
+  .glow-cyan {
+    box-shadow: var(--shadow-glow);
+    transition: var(--transition-glow);
+  }
+
+  .glow-cyan:hover {
+    box-shadow: 0 0 40px hsl(var(--electric-cyan) / 0.5);
+  }
+
+  .glow-green {
+    box-shadow: var(--shadow-green-glow);
+    transition: var(--transition-glow);
+  }
+
+  /* Glass effect */
+  .glass {
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border));
+  }
+
+  /* Text gradients */
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Custom animations */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-glow {
+    from {
+      box-shadow: 0 0 20px hsl(var(--electric-cyan) / 0.3);
+    }
+    to {
+      box-shadow: 0 0 40px hsl(var(--electric-cyan) / 0.6);
+    }
+  }
+
+  /* Map overlay */
+  .map-overlay {
+    background: var(--gradient-overlay);
   }
 }
