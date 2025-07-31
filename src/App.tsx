@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import RoutePlanner from "./pages/RoutePlanner";
 import LiveMap from "./pages/LiveMap";
-import TransitWallet from "./pages/TransitWallet";
+
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
@@ -24,7 +24,7 @@ const App = () => (
             <Route index element={<Dashboard />} />
             <Route path="routes" element={<RoutePlanner />} />
             <Route path="map" element={<LiveMap />} />
-            <Route path="wallet" element={<TransitWallet />} />
+            
             <Route path="profile" element={<Profile />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Home, Route, Map, CreditCard, User } from "lucide-react";
+import { Home, Route, Map, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const BottomNavigation = () => {
@@ -7,13 +7,12 @@ const BottomNavigation = () => {
     { to: "/", icon: Home, label: "Home" },
     { to: "/routes", icon: Route, label: "Routes" },
     { to: "/map", icon: Map, label: "Live Map" },
-    { to: "/wallet", icon: CreditCard, label: "Wallet" },
     { to: "/profile", icon: User, label: "Profile" },
   ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border z-50">
-      <div className="grid grid-cols-5 h-16">
+      <div className="grid grid-cols-4 h-16">
         {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
