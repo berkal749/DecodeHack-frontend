@@ -11,6 +11,8 @@ import LiveMap from "./pages/LiveMap";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
+import login from "./pages/login";
+import Register from "./pages/register";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +28,7 @@ const App = () => (
             <Route index element={<Dashboard />} />
             <Route path="routes" element={<RoutePlanner />} />
             <Route path="map" element={<LiveMap />} />
-            
+            <Route path="login" element={<Register />}> </Route>
             <Route path="profile" element={<Profile />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
