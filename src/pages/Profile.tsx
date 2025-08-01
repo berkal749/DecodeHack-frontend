@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 
 import { useState, useEffect } from 'react';
-import { useUser, setUser} from '@/contexts/UserContext';
+import { useUser} from '@/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { authAPI, setAuthToken, removeAuthToken } from '@/lib/api';
 
@@ -19,44 +19,16 @@ const Profile = () => {
   // };
 
   const settingSections = [
-    {
-      title: "Notifications",
-      icon: Bell,
-      items: [
-        { label: "Route Updates", enabled: true },
-        { label: "Delay Alerts", enabled: true },
-        { label: "Promotional Offers", enabled: false },
-        { label: "Weekly Summary", enabled: true },
-      ]
-    },
-    {
-      title: "Privacy & Security",
-      icon: Shield,
-      items: [
-        { label: "Location Services", enabled: true },
-        { label: "Data Analytics", enabled: false },
-        { label: "Biometric Login", enabled: true },
-      ]
-    },
+    
     {
       title: "Preferences",
       icon: Settings,
       items: [
         { label: "Dark Mode", enabled: true },
-        { label: "Sound Effects", enabled: true },
-        { label: "Vibration", enabled: true },
         { label: "Auto-refresh Map", enabled: true },
       ]
     }
   ];
-
-  const menuItems = [
-    { label: "Payment Methods", icon: CreditCard, action: "manage" },
-    { label: "Saved Locations", icon: MapPin, action: "view" },
-    { label: "Trip History", icon: Smartphone, action: "view" },
-    { label: "Help & Support", icon: HelpCircle, action: "contact" },
-  ];
-
   const { user, logout } = useUser();
   const [profileMessage, setProfileMessage] = useState('Fetching profile...');
   const navigate = useNavigate();
@@ -86,14 +58,6 @@ const Profile = () => {
     navigate('/welcome');
   };
 
-  if (!user) {
-    setUser({
-      name: "John Doe",
-      email: "john.doe@email.com",
-      phone: "+1 (555) 123-4567",
-      memberSince: "March 2023"
-    });
-  }
 
   return (
     <div className="p-4 space-y-6">
@@ -110,9 +74,9 @@ const Profile = () => {
             JD
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold">{user.name}</h2>
-            <p className="text-muted-foreground">{user.email}</p>
-            <p className="text-sm text-muted-foreground mt-1">Member since {user.memberSince}</p>
+            <h2 className="text-xl font-bold">{"user.data.name"}</h2>
+            <p className="text-muted-foreground">{"user.data.email"}</p>
+            <p className="text-sm text-muted-foreground mt-1">Member since {"blank"}</p>
             <Button variant="glow" size="sm" className="mt-3">
               <User className="w-4 h-4 mr-2" />
               Edit Profile
@@ -121,22 +85,6 @@ const Profile = () => {
         </div>
       </Card>
 
-      {/* Quick Actions */}
-      <div className="grid grid-cols-2 gap-3">
-        {menuItems.map((item) => (
-          <Card key={item.label} className="p-4 hover:border-electric-cyan/50 transition-colors cursor-pointer">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-electric-cyan/20 flex items-center justify-center">
-                <item.icon className="w-5 h-5 text-electric-cyan" />
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-sm">{item.label}</p>
-              </div>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            </div>
-          </Card>
-        ))}
-      </div>
 
       {/* Settings Sections */}
       {settingSections.map((section) => (
