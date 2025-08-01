@@ -18,6 +18,7 @@ import Register from "./pages/register";
 const queryClient = new QueryClient();
 
 const App = () => (
+  <ThemeProvider>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <UserProvider>
@@ -39,7 +40,7 @@ const App = () => (
       </BrowserRouter>
       </UserProvider>
     </TooltipProvider>
-  </QueryClientProvider>
+  </QueryClientProvider></ThemeProvider>
 );
 
 export default App;
