@@ -74,7 +74,7 @@ export default function Login() {
             onChange={handleChange(setEmail)}
             onKeyPress={handleKeyPress}
             disabled={loading}
-            className="h-12 bg-dark-card border-border/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-primary/20"
+            className="h-12 bg-card text-card-foreground border-border/20 placeholder:text-muted-foreground focus:border-primary/50 focus:ring-primary/20"
           />
 
           <Input
@@ -84,7 +84,7 @@ export default function Login() {
             onChange={handleChange(setPassword)}
             onKeyPress={handleKeyPress}
             disabled={loading}
-            className="h-12 bg-dark-card border-border/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-primary/20"
+            className="h-12 bg-card text-card-foreground border-border/20 placeholder:text-muted-foreground focus:border-primary/50 focus:ring-primary/20"
           />
 
           <Button
