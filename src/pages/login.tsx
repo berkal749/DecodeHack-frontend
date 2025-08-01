@@ -26,7 +26,7 @@ export default function Login() {
         const userData = response.data.data;
         setAuthToken(userData.token);
         login(userData);
-        navigate('/dashboard');
+        navigate('/Profile');
       } else {
         toast({
           title: "Login Failed",
