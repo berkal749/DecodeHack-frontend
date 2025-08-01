@@ -2,20 +2,22 @@ import { useState, KeyboardEvent, ChangeEvent } from 'react';
 import { useUser } from '@/contexts/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { authAPI, setAuthToken } from '@/lib/api';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [loginError, setLoginError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const { login } = useUser();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const loginUser = async () => {
     if (loading) return;
 
     setLoading(true);
-    setLoginError('');
 
     try {
       const response = await authAPI.login(email, password);
@@ -26,10 +28,18 @@ export default function Login() {
         login(userData);
         navigate('/dashboard');
       } else {
-        setLoginError(response.data.message || 'Login failed');
+        toast({
+          title: "Login Failed",
+          description: response.data.message || 'Login failed',
+          variant: "destructive"
+        });
       }
     } catch (error: any) {
-      setLoginError(error?.response?.data?.message || 'Error during login');
+      toast({
+        title: "Error",
+        description: error?.response?.data?.message || 'Error during login',
+        variant: "destructive"
+      });
     } finally {
       setLoading(false);
     }
@@ -47,48 +57,51 @@ export default function Login() {
       setter(e.target.value);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col justify-center px-6">
-      <div className="space-y-5">
-        <h1 className="text-4xl font-bold text-white text-center mb-8">
-          Login
-        </h1>
+    <div className="min-h-screen bg-dark flex flex-col justify-center px-6">
+      <div className="max-w-md mx-auto w-full space-y-6">
+        <div className="text-center space-y-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            Welcome Back
+          </h1>
+          <p className="text-muted-foreground">Access your smart city transport</p>
+        </div>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={handleChange(setEmail)}
-          onKeyPress={handleKeyPress}
-          className="w-full p-4 bg-white bg-opacity-10 text-white rounded-lg border-none placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          disabled={loading}
-        />
+        <div className="space-y-4">
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleChange(setEmail)}
+            onKeyPress={handleKeyPress}
+            disabled={loading}
+            className="h-12 bg-dark-card border-border/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-primary/20"
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={handleChange(setPassword)}
-          onKeyPress={handleKeyPress}
-          className="w-full p-4 bg-white bg-opacity-10 text-white rounded-lg border-none placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          disabled={loading}
-        />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={handleChange(setPassword)}
+            onKeyPress={handleKeyPress}
+            disabled={loading}
+            className="h-12 bg-dark-card border-border/20 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-primary/20"
+          />
 
-        {loginError && (
-          <div className="text-red-500 text-center">{loginError}</div>
-        )}
+          <Button
+            onClick={loginUser}
+            disabled={loading}
+            variant="electric"
+            size="lg"
+            className="w-full h-12 mt-6"
+          >
+            {loading ? 'Logging in...' : 'Login'}
+          </Button>
 
-        <button
-          onClick={loginUser}
-          disabled={loading}
-          className="w-full p-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
-        >
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-
-        <div className="text-center mt-6">
-          <Link to="/register" className="text-blue-400 hover:underline">
-            Don't have an account? Register
-          </Link>
+          <div className="text-center">
+            <Link to="/register" className="text-primary hover:text-primary/80 transition-colors">
+              Don't have an account? Register
+            </Link>
+          </div>
         </div>
       </div>
     </div>
