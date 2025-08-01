@@ -55,7 +55,7 @@ const Profile = () => {
   const handleLogout = () => {
     removeAuthToken();
     logout();
-    navigate('/welcome');
+    navigate('/register');
   };
 
 
@@ -127,7 +127,11 @@ const Profile = () => {
       </Card>
 
       {/* Logout */}
-      <Button variant="destructive" className="w-full h-12">
+      <Button
+        variant="destructive"
+        className="w-full h-12"
+        onClick={handleLogout}
+      >
         <LogOut className="w-5 h-5 mr-2" />
         Sign Out
       </Button>
