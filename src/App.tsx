@@ -12,35 +12,34 @@ import LiveMap from "./pages/LiveMap";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/login";
+import Register from "./pages/register";
 
 const queryClient = new QueryClient();
 
-function App() {
-  return (
-    <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <UserProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Dashboard />} />
-                  <Route path="routes" element={<RoutePlanner />} />
-                  <Route path="map" element={<LiveMap />} />
-
-                  <Route path="profile" element={<Profile />} />
-                </Route>
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </UserProvider>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
-  );
-}
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <UserProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="routes" element={<RoutePlanner />} />
+            <Route path="map" element={<LiveMap />} />
+            <Route path="login" element={<Login />}> </Route>
+            <Route path="register" element={<Register />}> </Route>
+            <Route path="profile" element={<Profile />} />
+          </Route>
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+      </UserProvider>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
