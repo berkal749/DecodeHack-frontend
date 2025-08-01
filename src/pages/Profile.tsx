@@ -1,28 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { 
-  User, 
-  Bell, 
-  Shield, 
-  CreditCard, 
-  MapPin, 
-  Moon, 
-  Volume2,
-  Smartphone,
-  HelpCircle,
-  LogOut,
-  ChevronRight,
-  Settings
-} from "lucide-react";
+
+import { useState, useEffect } from 'react';
+import { useUser, setUser} from '@/contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
+import { authAPI, setAuthToken, removeAuthToken } from '@/lib/api';
+
+import { User, Bell, Shield, CreditCard, MapPin, Moon, Volume2, Smartphone, HelpCircle, LogOut, ChevronRight, Settings} from "lucide-react";
+
 
 const Profile = () => {
-  const user = {
-    name: "John Doe",
-    email: "john.doe@email.com",
-    phone: "+1 (555) 123-4567",
-    memberSince: "March 2023"
-  };
+  // const user = {
+  //   name: "John Doe",
+  //   email: "john.doe@email.com",
+  //   phone: "+1 (555) 123-4567",
+  //   memberSince: "March 2023"
+  // };
 
   const settingSections = [
     {
@@ -62,6 +56,44 @@ const Profile = () => {
     { label: "Trip History", icon: Smartphone, action: "view" },
     { label: "Help & Support", icon: HelpCircle, action: "contact" },
   ];
+
+  const { user, logout } = useUser();
+  const [profileMessage, setProfileMessage] = useState('Fetching profile...');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!user) return;
+
+      try {
+        setAuthToken(user.token);
+        const response = await authAPI.getProfile();
+
+        setProfileMessage(
+          response.data.success ? 'Profile loaded successfully' : 'Failed to load profile'
+        );
+      } catch (error) {
+        setProfileMessage('Error loading profile');
+      }
+    };
+
+    fetchProfile();
+  }, [user]);
+
+  const handleLogout = () => {
+    removeAuthToken();
+    logout();
+    navigate('/welcome');
+  };
+
+  if (!user) {
+    setUser({
+      name: "John Doe",
+      email: "john.doe@email.com",
+      phone: "+1 (555) 123-4567",
+      memberSince: "March 2023"
+    });
+  }
 
   return (
     <div className="p-4 space-y-6">
