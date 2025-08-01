@@ -6,30 +6,25 @@ import { useState, useEffect } from 'react';
 import { useUser} from '@/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { authAPI, setAuthToken, removeAuthToken } from '@/lib/api';
+import { useTheme } from "@/contexts/ThemeContext";
 
 import { User, Bell, Shield, CreditCard, MapPin, Moon, Volume2, Smartphone, HelpCircle, LogOut, ChevronRight, Settings} from "lucide-react";
 
 
 const Profile = () => {
-  // const user = {
-  //   name: "John Doe",
-  //   email: "john.doe@email.com",
-  //   phone: "+1 (555) 123-4567",
-  //   memberSince: "March 2023"
-  // };
+  const { user, logout } = useUser();
+  const { theme, toggleTheme } = useTheme();
 
   const settingSections = [
-    
     {
       title: "Preferences",
       icon: Settings,
       items: [
-        { label: "Dark Mode", enabled: true },
+        { label: "Dark Mode", enabled: theme === "dark" },
         { label: "Auto-refresh Map", enabled: true },
       ]
     }
   ];
-  const { user, logout } = useUser();
   const [profileMessage, setProfileMessage] = useState('Fetching profile...');
   const navigate = useNavigate();
 
@@ -98,10 +93,18 @@ const Profile = () => {
             {section.items.map((item, index) => (
               <div key={index} className="flex items-center justify-between">
                 <span className="font-medium">{item.label}</span>
-                <Switch 
-                  checked={item.enabled}
-                  className="data-[state=checked]:bg-electric-cyan"
-                />
+                {item.label === "Dark Mode" ? (
+                  <Switch
+                    checked={theme === "dark"}
+                    onCheckedChange={toggleTheme}
+                    className="data-[state=checked]:bg-electric-cyan"
+                  />
+                ) : (
+                  <Switch
+                    checked={item.enabled}
+                    className="data-[state=checked]:bg-electric-cyan"
+                  />
+                )}
               </div>
             ))}
           </Card>
@@ -127,7 +130,7 @@ const Profile = () => {
       </Card>
 
       {/* Logout */}
-      <Button variant="destructive" className="w-full h-12">
+      <Button variant="destructive" className="w-full h-12" onClick={handleLogout}>
         <LogOut className="w-5 h-5 mr-2" />
         Sign Out
       </Button>

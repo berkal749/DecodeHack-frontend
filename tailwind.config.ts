@@ -69,7 +69,11 @@ export default {
 				'electric-cyan': 'hsl(var(--electric-cyan))',
 				'electric-green': 'hsl(var(--electric-green))',
 				'neon-purple': 'hsl(var(--neon-purple))',
-				'city-gray': 'hsl(var(--city-gray))'
+				'city-gray': 'hsl(var(--city-gray))',
+				// Light mode colors
+				'background-light': '#f8fafc',
+				'card-light': '#e2e8f0',
+				'text-light': '#22223b',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

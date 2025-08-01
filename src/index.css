@@ -7,114 +7,115 @@
 
 @layer base {
   :root {
-    /* Deep black city theme */
-    --background: 220 13% 7%;                /* #121212 deep black */
-    --foreground: 0 0% 98%;                  /* Nearly white text */
+    /* Light Theme */
+    --background: 220 100% 98%;              /* Soft blue-white */
+    --foreground: 222 44% 18%;               /* Deep navy text */
 
-    --card: 220 13% 9%;                      /* Slightly lighter black for cards */
-    --card-foreground: 0 0% 95%;
+    --card: 220 60% 99%;                     /* White card */
+    --card-foreground: 222 44% 18%;
 
-    --popover: 220 13% 8%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 220 60% 98%;
+    --popover-foreground: 222 44% 18%;
 
-    /* Electric cyan primary */
-    --primary: 190 100% 50%;                 /* #00D9FF electric cyan */
-    --primary-foreground: 220 13% 7%;
+    --primary: 204 100% 52%;                 /* Bright blue */
+    --primary-foreground: 220 100% 98%;
 
-    /* Dark secondary */
-    --secondary: 220 13% 15%;                /* Dark gray secondary */
-    --secondary-foreground: 0 0% 90%;
+    --secondary: 48 100% 62%;                /* Warm yellow */
+    --secondary-foreground: 222 44% 18%;
 
-    --muted: 220 13% 12%;                    /* Muted dark */
-    --muted-foreground: 0 0% 60%;
+    --muted: 220 16% 90%;                    /* Muted blue-gray */
+    --muted-foreground: 222 44% 40%;
 
-    /* Electric green accent */
-    --accent: 150 100% 50%;                  /* #00FF88 electric green */
-    --accent-foreground: 220 13% 7%;
+    --accent: 162 100% 40%;                  /* Fresh green */
+    --accent-foreground: 220 100% 98%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 80% 60%;                /* Vivid red */
+    --destructive-foreground: 220 100% 98%;
 
-    --border: 220 13% 18%;                   /* Subtle borders */
-    --input: 220 13% 15%;                    /* Input backgrounds */
-    --ring: 190 100% 50%;                    /* Cyan focus rings */
+    --border: 220 16% 85%;                   /* Subtle border */
+    --input: 220 16% 95%;                    /* Input backgrounds */
+    --ring: 204 100% 52%;                    /* Blue focus ring */
 
     --radius: 1rem;
 
-    /* Custom transportation theme colors */
-    --electric-cyan: 190 100% 50%;           /* #00D9FF */
-    --electric-green: 150 100% 50%;          /* #00FF88 */
-    --neon-purple: 270 100% 60%;             /* #9966FF */
-    --city-gray: 220 13% 25%;                /* Medium gray */
-    --glow-cyan: 190 100% 50%;               /* For glowing effects */
+    /* Sidebar */
+    --sidebar-background: 220 100% 96%;
+    --sidebar-foreground: 222 44% 18%;
+    --sidebar-primary: 204 100% 52%;
+    --sidebar-primary-foreground: 220 100% 98%;
+    --sidebar-accent: 162 100% 40%;
+    --sidebar-accent-foreground: 220 100% 98%;
+    --sidebar-border: 220 16% 85%;
+    --sidebar-ring: 204 100% 52%;
+
+    /* Custom theme colors */
+    --electric-cyan: 192 100% 50%;           /* Cyan */
+    --electric-green: 162 100% 40%;          /* Green */
+    --neon-purple: 272 100% 60%;             /* Purple */
+    --city-gray: 220 16% 85%;                /* Gray */
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--electric-cyan)), hsl(var(--electric-green)));
-    --gradient-dark: linear-gradient(180deg, hsl(var(--background)), hsl(220 13% 5%));
-    --gradient-overlay: linear-gradient(180deg, transparent, hsl(var(--background) / 0.8));
+    --gradient-primary: linear-gradient(135deg, hsl(204 100% 52%), hsl(162 100% 40%));
+    --gradient-dark: linear-gradient(180deg, hsl(220 100% 98%), hsl(220 16% 85%));
+    --gradient-overlay: linear-gradient(180deg, transparent, hsl(220 100% 98% / 0.8));
 
     /* Glows and shadows */
-    --shadow-glow: 0 0 30px hsl(var(--electric-cyan) / 0.3);
-    --shadow-green-glow: 0 0 20px hsl(var(--electric-green) / 0.4);
-    --shadow-card: 0 8px 25px hsl(220 13% 3% / 0.8);
+    --shadow-glow: 0 0 30px hsl(204 100% 52% / 0.3);
+    --shadow-green-glow: 0 0 20px hsl(162 100% 40% / 0.4);
+    --shadow-card: 0 8px 25px hsl(220 16% 85% / 0.8);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-glow: box-shadow 0.3s ease;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark Theme */
+    --background: 222 44% 10%;               /* Deep navy */
+    --foreground: 220 100% 98%;              /* White text */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 222 44% 14%;                     /* Slightly lighter navy */
+    --card-foreground: 220 100% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 222 44% 12%;
+    --popover-foreground: 220 100% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 204 100% 52%;                 /* Bright blue */
+    --primary-foreground: 222 44% 10%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 48 100% 62%;                /* Warm yellow */
+    --secondary-foreground: 222 44% 10%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 222 16% 18%;                    /* Muted navy */
+    --muted-foreground: 220 100% 80%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 162 100% 40%;                  /* Fresh green */
+    --accent-foreground: 222 44% 10%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 80% 60%;                /* Vivid red */
+    --destructive-foreground: 220 100% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 222 16% 18%;                   /* Subtle border */
+    --input: 222 16% 14%;                    /* Input backgrounds */
+    --ring: 204 100% 52%;                    /* Blue focus ring */
+
+    --radius: 1rem;
+
+    /* Sidebar */
+    --sidebar-background: 222 44% 14%;
+    --sidebar-foreground: 220 100% 98%;
+    --sidebar-primary: 204 100% 52%;
+    --sidebar-primary-foreground: 222 44% 10%;
+    --sidebar-accent: 162 100% 40%;
+    --sidebar-accent-foreground: 222 44% 10%;
+    --sidebar-border: 222 16% 18%;
+    --sidebar-ring: 204 100% 52%;
+
+    /* Custom theme colors */
+    --electric-cyan: 192 100% 50%;           /* Cyan */
+    --electric-green: 162 100% 40%;          /* Green */
+    --neon-purple: 272 100% 60%;             /* Purple */
+    --city-gray: 222 16% 18%;                /* Gray */
   }
 }
 
@@ -125,6 +126,8 @@
 
   body {
     @apply bg-background text-foreground font-inter;
+    background: var(--background);
+    color: var(--text);
   }
 }
 
