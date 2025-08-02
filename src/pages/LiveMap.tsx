@@ -32,7 +32,6 @@ const LiveMap = () => {
 
   return (
     <div className="relative h-screen bg-background">
-      {/* Search Header */}
       <div className="absolute top-0 left-0 right-0 z-10 p-4 pt-12 bg-gradient-to-b from-background to-transparent">
         <div className="space-y-3">
           <div className="relative">
@@ -65,24 +64,19 @@ const LiveMap = () => {
         </div>
       </div>
 
-      {/* Map Area - Simulated with gradient and patterns */}
       <div className="absolute inset-0 bg-gradient-to-br from-city-gray/10 via-background to-electric-cyan/5">
-        {/* Grid pattern overlay */}
         <div className="absolute inset-0 opacity-20" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300D9FF' fill-opacity='0.2'%3E%3Cpath d='M20 20h20v20H20zM0 0h20v20H0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
         }}></div>
         
-        {/* Simulated vehicles on map */}
         <div className="absolute top-1/3 left-1/4 w-4 h-4 bg-electric-cyan rounded-full animate-pulse glow-cyan"></div>
         <div className="absolute top-1/2 right-1/3 w-4 h-4 bg-electric-green rounded-full animate-pulse glow-green"></div>
         <div className="absolute bottom-1/3 left-1/2 w-4 h-4 bg-neon-purple rounded-full animate-pulse"></div>
         
-        {/* Route lines */}
         <div className="absolute top-1/4 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-electric-cyan/50 to-transparent"></div>
         <div className="absolute top-0 bottom-0 left-1/3 w-0.5 bg-gradient-to-b from-transparent via-electric-green/50 to-transparent"></div>
       </div>
 
-      {/* Vehicle Type Filters */}
       {showFilters && (
         <div className="absolute top-32 left-4 right-4 z-10">
           <Card className="p-4 bg-card/95 backdrop-blur-md border-electric-cyan/20">
@@ -102,7 +96,6 @@ const LiveMap = () => {
         </div>
       )}
 
-      {/* Bottom Panel - Nearby Vehicles */}
       <div className="absolute bottom-0 left-0 right-0 z-10 p-4 bg-gradient-to-t from-background to-transparent">
         <Card className="p-4 bg-card/95 backdrop-blur-md border-electric-cyan/20">
           <div className="flex items-center justify-between mb-3">
@@ -145,7 +138,6 @@ const LiveMap = () => {
         </Card>
       </div>
 
-      {/* Floating Action Button */}
       <Button 
         variant="electric" 
         size="fab"

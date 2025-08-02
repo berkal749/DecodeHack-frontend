@@ -5,7 +5,6 @@ import { MapPin, Navigation, Clock, Bus, Train, Car } from "lucide-react";
 const Dashboard = () => {
   return (
     <div className="p-4 space-y-6">
-      {/* Header */}
       <div className="flex items-center justify-between pt-8">
         <div>
           <h1 className="text-2xl font-bold text-gradient-primary">CityFlow</h1>
@@ -16,7 +15,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Live Map Preview */}
       <Card className="relative h-48 bg-gradient-to-br from-city-gray/20 to-background border-electric-cyan/20 overflow-hidden">
         <div className="absolute inset-0 opacity-20" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300D9FF' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
@@ -44,7 +42,6 @@ const Dashboard = () => {
         </div>
       </Card>
 
-      {/* Quick Actions */}
       <div className="space-y-3">
         <h2 className="text-lg font-semibold">Quick Actions</h2>
         <div className="grid grid-cols-2 gap-3">
@@ -59,7 +56,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Nearby Transport */}
       <div className="space-y-3">
         <h2 className="text-lg font-semibold">Nearby Transport</h2>
         <div className="space-y-3">

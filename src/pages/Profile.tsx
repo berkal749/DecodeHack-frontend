@@ -56,13 +56,11 @@ const Profile = () => {
 
   return (
     <div className="p-4 space-y-6">
-      {/* Header */}
       <div className="pt-8">
         <h1 className="text-2xl font-bold">Profile</h1>
         <p className="text-muted-foreground">Manage your account and preferences</p>
       </div>
 
-      {/* User Info Card */}
       <Card className="p-6 bg-gradient-to-br from-electric-cyan/10 to-electric-green/10 border-electric-cyan/20">
         <div className="flex items-start gap-4">
           <div className="w-16 h-16 rounded-full bg-gradient-to-r from-electric-cyan to-electric-green flex items-center justify-center text-xl font-bold text-background">
@@ -81,7 +79,6 @@ const Profile = () => {
       </Card>
 
 
-      {/* Settings Sections */}
       {settingSections.map((section) => (
         <div key={section.title} className="space-y-3">
           <div className="flex items-center gap-2">
@@ -111,7 +108,6 @@ const Profile = () => {
         </div>
       ))}
 
-      {/* App Info */}
       <Card className="p-4">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
@@ -129,7 +125,6 @@ const Profile = () => {
         </div>
       </Card>
 
-      {/* Logout */}
       <Button
         variant="destructive"
         className="w-full h-12"
@@ -139,7 +134,6 @@ const Profile = () => {
         Sign Out
       </Button>
 
-      {/* Bottom spacing for navigation */}
       <div className="h-4" />
     </div>
   );

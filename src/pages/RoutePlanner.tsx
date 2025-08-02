@@ -43,13 +43,10 @@ const RoutePlanner = () => {
 
   return (
     <div className="p-4 space-y-6">
-      {/* Header */}
       <div className="pt-8">
         <h1 className="text-2xl font-bold">Plan Your Route</h1>
         <p className="text-muted-foreground">Find the best way to get around</p>
       </div>
-
-      {/* Location Inputs */}
       <div className="space-y-4">
         <div className="relative">
           <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-electric-cyan" />
@@ -77,7 +74,6 @@ const RoutePlanner = () => {
         </Button>
       </div>
 
-      {/* Route Options */}
       <div className="space-y-4">
         <h2 className="text-lg font-semibold">Route Options</h2>
         
@@ -136,7 +132,6 @@ const RoutePlanner = () => {
         ))}
       </div>
 
-      {/* Quick Destinations */}
       <div className="space-y-3">
         <h2 className="text-lg font-semibold">Quick Destinations</h2>
         <div className="grid grid-cols-2 gap-3">

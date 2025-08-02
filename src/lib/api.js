@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://nightalk-backend.vercel.app/';
+const API_BASE_URL = 'backend-link';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
