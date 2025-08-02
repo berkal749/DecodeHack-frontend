@@ -48,7 +48,6 @@ const RoutePlanner = () => {
   };
 
   const iconFor = (serviceName) => {
-    // crude mapping, extend as needed
     if (serviceName.toLowerCase().includes("bus")) return Bus;
     if (serviceName.toLowerCase().includes("tram")) return Train;
     if (serviceName.toLowerCase().includes("uber")) return Car;
