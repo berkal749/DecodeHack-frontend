@@ -7,7 +7,7 @@ const Dashboard = () => {
     <div className="p-4 space-y-6">
       <div className="flex items-center justify-between pt-8">
         <div>
-          <h1 className="text-2xl font-bold text-gradient-primary">CityFlow</h1>
+          <h1 className="text-2xl font-bold text-gradient-primary"> FastCity</h1>
           <p className="text-muted-foreground">Your smart city companion</p>
         </div>
         <div className="w-10 h-10 rounded-full bg-gradient-to-r from-electric-cyan to-electric-green flex items-center justify-center">
