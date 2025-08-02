@@ -2,44 +2,58 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { MapPin, Navigation, Clock, ArrowRight, Bus, Train, Car, User } from "lucide-react";
+import {
+  MapPin,
+  Navigation,
+  Clock,
+  ArrowRight,
+  Bus,
+  Train,
+  Car,
+  User
+} from "lucide-react";
+import { api } from "@/lib/api";
 
 const RoutePlanner = () => {
   const [fromLocation, setFromLocation] = useState("");
   const [toLocation, setToLocation] = useState("");
+  const [journeys, setJourneys] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const routeOptions = [
-    {
-      type: "Fastest",
-      time: "23 min",
-      cost: "40 DA",
-      steps: [
-        { icon: User, text: "Walk 3 min", color: "text-muted-foreground" },
-        { icon: Bus, text: "Bus 47 • 15 min", color: "text-electric-cyan" },
-        { icon: User, text: "Walk 5 min", color: "text-muted-foreground" },
-      ],
-      primary: true
-    },
-    {
-      type: "Cheapest",
-      time: "31 min",
-      cost: "40 DA",
-      steps: [
-        { icon: User, text: "Walk 8 min", color: "text-muted-foreground" },
-        { icon: Train, text: "Metro Blue • 18 min", color: "text-electric-green" },
-        { icon: User, text: "Walk 5 min", color: "text-muted-foreground" },
-      ]
-    },
-    {
-      type: "Comfortable",
-      time: "18 min",
-      cost: "600 DA",
-      steps: [
-        { icon: User, text: "Walk 2 min", color: "text-muted-foreground" },
-        { icon: Car, text: "UberX • 16 min", color: "text-neon-purple" },
-      ]
+  const handleFindRoutes = async () => {
+    setError("");
+    setJourneys([]);
+    if (!fromLocation || !toLocation) {
+      setError("Please fill in both From and To fields.");
+      return;
     }
-  ];
+
+    setLoading(true);
+    try {
+      const resp = await api.get("/journeys", {
+        params: { start: fromLocation, end: toLocation },
+      });
+      if (resp.data.success) {
+        setJourneys(resp.data.journeys);
+      } else {
+        setError(resp.data.error || "No journeys found.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.error || err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const iconFor = (serviceName) => {
+    // crude mapping, extend as needed
+    if (serviceName.toLowerCase().includes("bus")) return Bus;
+    if (serviceName.toLowerCase().includes("tram")) return Train;
+    if (serviceName.toLowerCase().includes("uber")) return Car;
+    return User;
+  };
 
   return (
     <div className="p-4 space-y-6">
@@ -47,102 +61,91 @@ const RoutePlanner = () => {
         <h1 className="text-2xl font-bold">Plan Your Route</h1>
         <p className="text-muted-foreground">Find the best way to get around</p>
       </div>
+
       <div className="space-y-4">
         <div className="relative">
           <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-electric-cyan" />
           <Input
-            placeholder="From: Current location"
+            placeholder="From"
             value={fromLocation}
             onChange={(e) => setFromLocation(e.target.value)}
             className="pl-12 h-14 bg-card/50 border-electric-cyan/30 text-base"
           />
         </div>
-        
+
         <div className="relative">
           <Navigation className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-electric-green" />
           <Input
-            placeholder="To: Where are you going?"
+            placeholder="To"
             value={toLocation}
             onChange={(e) => setToLocation(e.target.value)}
             className="pl-12 h-14 bg-card/50 border-electric-green/30 text-base"
           />
         </div>
 
-        <Button variant="electric" className="w-full h-14 text-base">
-          <Navigation className="w-5 h-5 mr-2" />
-          Find Routes
+        {error && (
+          <p className="text-sm text-red-500">{error}</p>
+        )}
+
+        <Button
+          variant="electric"
+          className="w-full h-14 text-base"
+          onClick={handleFindRoutes}
+          disabled={loading}
+        >
+          {loading ? "Searching..." : <>
+            <Navigation className="w-5 h-5 mr-2" />
+            Find Routes
+          </>}
         </Button>
       </div>
 
-      <div className="space-y-4">
-        <h2 className="text-lg font-semibold">Route Options</h2>
-        
-        {routeOptions.map((route, index) => (
-          <Card 
-            key={index} 
-            className={`p-4 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
-              route.primary 
-                ? "border-electric-cyan bg-electric-cyan/5 glow-cyan" 
-                : "border-border hover:border-electric-cyan/50"
-            }`}
-          >
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <h3 className={`font-semibold ${route.primary ? "text-electric-cyan" : ""}`}>
-                  {route.type}
-                </h3>
-                {route.primary && (
-                  <span className="px-2 py-1 text-xs bg-electric-cyan/20 text-electric-cyan rounded-full">
-                    Recommended
-                  </span>
-                )}
+      {journeys.length > 0 && (
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold">Route Options</h2>
+          {journeys.map((journey, idx) => (
+            <Card
+              key={idx}
+              className={`p-4 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
+                idx === 0
+                  ? "border-electric-cyan bg-electric-cyan/5 glow-cyan"
+                  : "border-border hover:border-electric-cyan/50"
+              }`}
+            >
+              <div className="mb-2">
+                <span className="uppercase text-sm font-medium">
+                  {journey.type}
+                </span>
               </div>
-              <div className="text-right">
-                <p className="font-medium">{route.time}</p>
-                <p className="text-sm text-muted-foreground">{route.cost}</p>
+              <div className="space-y-2">
+                {journey.segments.map((seg, sidx) => {
+                  const Icon = iconFor(seg.service);
+                  return (
+                    <div key={sidx} className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-center gap-1">
+                        <Icon className="w-5 h-5 text-electric-cyan" />
+                        <span className="font-semibold">{seg.service}</span>
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {seg.stops.join(" → ")}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-
-            <div className="flex items-center gap-2 flex-wrap">
-              {route.steps.map((step, stepIndex) => (
-                <div key={stepIndex} className="flex items-center gap-2">
-                  <div className="flex items-center gap-1">
-                    <step.icon className={`w-4 h-4 ${step.color}`} />
-                    <span className={`text-sm ${step.color}`}>{step.text}</span>
-                  </div>
-                  {stepIndex < route.steps.length - 1 && (
-                    <ArrowRight className="w-3 h-3 text-muted-foreground" />
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-3 pt-3 border-t border-border/50">
-              <div className="flex items-center justify-between">
+              <div className="mt-3 pt-3 border-t border-border/50 flex items-center justify-between">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Clock className="w-4 h-4" />
-                  <span>Departs every 5-8 min</span>
+                  <span>Up to 20 stops</span>
                 </div>
                 <Button variant="glow" size="sm">
                   Select Route
                 </Button>
               </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold">Quick Destinations</h2>
-        <div className="grid grid-cols-2 gap-3">
-          {["City Center", "Airport", "University", "Mall"].map((destination) => (
-            <Button key={destination} variant="outline" className="h-12">
-              <MapPin className="w-4 h-4 mr-2" />
-              {destination}
-            </Button>
+            </Card>
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 };
