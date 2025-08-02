@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'decodehack-backend.vercel.app';
+const API_BASE_URL = 'https://decodehack-backend.vercel.app';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
