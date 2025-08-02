@@ -12,7 +12,7 @@ const RoutePlanner = () => {
     {
       type: "Fastest",
       time: "23 min",
-      cost: "Free",
+      cost: "40 DA",
       steps: [
         { icon: User, text: "Walk 3 min", color: "text-muted-foreground" },
         { icon: Bus, text: "Bus 47 • 15 min", color: "text-electric-cyan" },
@@ -23,7 +23,7 @@ const RoutePlanner = () => {
     {
       type: "Cheapest",
       time: "31 min",
-      cost: "Free",
+      cost: "40 DA",
       steps: [
         { icon: User, text: "Walk 8 min", color: "text-muted-foreground" },
         { icon: Train, text: "Metro Blue • 18 min", color: "text-electric-green" },
@@ -33,7 +33,7 @@ const RoutePlanner = () => {
     {
       type: "Comfortable",
       time: "18 min",
-      cost: "$12-15",
+      cost: "600 DA",
       steps: [
         { icon: User, text: "Walk 2 min", color: "text-muted-foreground" },
         { icon: Car, text: "UberX • 16 min", color: "text-neon-purple" },
